@@ -1,5 +1,5 @@
-const express     = require('express'); // Import express
-const MongoClient = require('mongodb').MongoClient; // Import mondodb database
+const express     = require('express'); // Import Express
+const MongoClient = require('mongodb').MongoClient; // Import Mongo Client to connect to database
 const bodyParser  = require('body-parser'); // Import body-parser to parse JSON
 const db          = require('./config/db'); // Import database configuration file
 
