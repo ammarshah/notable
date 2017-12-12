@@ -1,23 +1,23 @@
-const express     = require('express'); // import express
-const MongoClient = require('mongodb').MongoClient; // import mondodb database
-const bodyParser  = require('body-parser'); // import body-parser to parse JSON
-const db          = require('./config/db'); // import database configuration file
+const express     = require('express'); // Import express
+const MongoClient = require('mongodb').MongoClient; // Import mondodb database
+const bodyParser  = require('body-parser'); // Import body-parser to parse JSON
+const db          = require('./config/db'); // Import database configuration file
 
-const app         = express(); // define app as an express instance
+const app         = express(); // Define app as an express instance
 
-const port        = 8000; // port that our app will listen to
+const port        = 8000; // Port that our app will listen to
 
-app.use(bodyParser.urlencoded({ extended: true })); // allow the app to parse urlencoded params as JSON
+app.use(bodyParser.urlencoded({ extended: true })); // Allow the app to parse urlencoded params as JSON
 
-// connect database
+// Connect database
 MongoClient.connect(db.url, (err, client) => {
   if (err) return console.log(err);
 
-  const database = client.db('notable');
+  const database = client.db('notable'); // Get database from client object. This is specific to Mongodb v3.0.0rc0
   
-  require('./app/routes')(app, database); // import all routes and pass app and database object
+  require('./app/routes')(app, database); // Import all routes and pass app and database object
   
-  app.listen(port, () => { // tell the app to listen to the defined port i.e. 8000
+  app.listen(port, () => { // Tell the app to listen to the defined port i.e. 8000
     console.log("We are live on " + port);
   });
 });
